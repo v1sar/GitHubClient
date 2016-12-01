@@ -3,11 +3,21 @@ package mail.ru.githubclient.proto;
 import org.androidannotations.annotations.EBean;
 
 import java.util.List;
+import retrofit2.Call;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.Retrofit;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 @EBean(scope = EBean.Scope.Singleton)
 public class GithubFacade {
 
-    public static final String API_URL = "https://api.github.com";
+    private static final String API_URL = "https://api.github.com";
+
+    private Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(API_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
 
     public void getUsers(String name, Callback<List<User>> users) {
         //TODO
