@@ -1,6 +1,7 @@
 package mail.ru.githubclient;
 
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.EditText;
@@ -26,10 +27,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Bean(GithubFacade.class)
     GithubFacade ghFacade;
+    @Bean
+    UsersAdapter adapter;
 
     @AfterViews
     void initViews() {
-        // Setup adapter here
+        users.setLayoutManager(new LinearLayoutManager(this));
+        users.setAdapter(adapter);
     }
 
     @Click(R.id.search)

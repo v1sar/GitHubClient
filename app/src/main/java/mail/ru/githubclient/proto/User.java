@@ -8,7 +8,7 @@ public class User {
         return login;
     }
 
-    String getAvatarUrl() {
+    public String getAvatarUrl() {
         return avatarUrl;
     }
 }
