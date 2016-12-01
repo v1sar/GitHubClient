@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<User> result) {
                 for (User u : result) {
-                    Log.d("USERS", u.getLogin());
+                    Log.d("USERS", u.getLogin() + " " + u.getAvatarUrl());
                 }
             }
 
