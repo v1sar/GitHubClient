@@ -4,11 +4,6 @@ public class User {
     private String login;
     private String avatarUrl;
 
-    User(String l, String ava) {
-        this.login = l;
-        this.avatarUrl = ava;
-    }
-
     public String getLogin() {
         return login;
     }
