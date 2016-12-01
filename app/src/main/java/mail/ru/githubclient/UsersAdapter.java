@@ -1,9 +1,6 @@
 package mail.ru.githubclient;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import org.androidannotations.annotations.EBean;
@@ -12,11 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mail.ru.githubclient.proto.User;
+import mail.ru.githubclient.ui.DefaultHolder;
+import mail.ru.githubclient.ui.UserView;
+import mail.ru.githubclient.ui.UserView_;
 
 @EBean
-class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserHolder> {
+class UsersAdapter extends RecyclerView.Adapter<DefaultHolder<User, UserView>> {
     private final List<User> users = new ArrayList<>();
-    private final LayoutInflater inflater;
 
     void setUsers(List<User> users) {
         this.users.clear();
@@ -24,17 +23,13 @@ class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserHolder> {
         notifyDataSetChanged();
     }
 
-    UsersAdapter(final Context context) {
-        inflater = LayoutInflater.from(context);
+    @Override
+    public DefaultHolder<User, UserView> onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new DefaultHolder<>(UserView_.build(parent.getContext()));
     }
 
     @Override
-    public UserHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new UserHolder(inflater.inflate(R.layout.user_item, parent, false));
-    }
-
-    @Override
-    public void onBindViewHolder(UserHolder holder, int position) {
+    public void onBindViewHolder(DefaultHolder<User, UserView> holder, int position) {
         holder.bind(users.get(position));
     }
 
@@ -43,13 +38,4 @@ class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserHolder> {
         return users.size();
     }
 
-    static class UserHolder extends RecyclerView.ViewHolder {
-        UserHolder(View itemView) {
-            super(itemView);
-        }
-
-        void bind(User user) {
-
-        }
-    }
 }
