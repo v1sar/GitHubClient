@@ -1,5 +1,8 @@
 package mail.ru.githubclient.proto;
 
+import android.util.Log;
+
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EBean;
 
 import java.io.IOException;
@@ -10,6 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 @EBean(scope = EBean.Scope.Singleton)
 public class GithubFacade {
@@ -22,17 +26,21 @@ public class GithubFacade {
             .build();
 
     public interface GitHub {
-        @GET("/search/users?q={query}")
-        Call<List<User>> users(@Path("query") String query);
+        @GET("/search/users")
+        Call<UsersResult> users(@Query("q") String query);
     }
 
     GitHub github = retrofit.create(GitHub.class);
 
+    @Background
     public void getUsers(String name, Callback<List<User>> users) {
-        Call<List<User>> call = github.users(name);
+        Call<UsersResult> call = github.users(name);
 
         try {
-            List<User> us = call.execute().body();
+            UsersResult res = call.execute().body();
+            Log.d("Facade", res + "");
+            List<User> us = res.getItems();
+
             users.onSuccess(us);
         }
         catch(IOException e) {
