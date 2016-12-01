@@ -2,6 +2,7 @@ package mail.ru.githubclient.proto;
 
 import org.androidannotations.annotations.EBean;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,8 +26,18 @@ public class GithubFacade {
         Call<List<User>> users(@Path("query") String query);
     }
 
-    public void getUsers(String name, Callback<List<User>> users) {
+    GitHub github = retrofit.create(GitHub.class);
 
+    public void getUsers(String name, Callback<List<User>> users) {
+        Call<List<User>> call = github.users(name);
+
+        try {
+            List<User> us = call.execute().body();
+            users.onSuccess(us);
+        }
+        catch(IOException e) {
+            users.onError(e);
+        }
     }
 
     public void getRepos(User user, Callback<List<Repo>> repos) {
