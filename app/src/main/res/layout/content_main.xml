@@ -25,6 +25,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
             android:layout_weight="1"/>
 
         <!-- TODO: вставить иконку поиска -->
