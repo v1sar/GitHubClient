@@ -3,13 +3,10 @@ package mail.ru.githubclient.proto;
 import org.androidannotations.annotations.EBean;
 
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.Retrofit;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
-
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -29,7 +26,7 @@ public class GithubFacade {
     }
 
     public void getUsers(String name, Callback<List<User>> users) {
-        //TODO
+
     }
 
     public void getRepos(User user, Callback<List<Repo>> repos) {
