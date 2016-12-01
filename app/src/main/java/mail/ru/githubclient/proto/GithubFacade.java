@@ -7,6 +7,8 @@ import java.util.List;
 @EBean(scope = EBean.Scope.Singleton)
 public class GithubFacade {
 
+    public static final String API_URL = "https://api.github.com";
+
     public void getUsers(String name, Callback<List<User>> users) {
         //TODO
     }
